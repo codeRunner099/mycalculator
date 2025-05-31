@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple Style Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #333;
+      color: #fff;
+    }
+    h1{
+      color: #ff1493;
+      text-align: center;
+      margin-top: 150px;
+    }
+
+    .calculator {
+      max-width: 300px;
+      margin: 50px auto;
+      border: 2px solid #ff69b4;
+      border-radius: 5px;
+      padding: 5px;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+      background-color: #333;
+    }
+
+    input[type="button"] {
+      width: calc(25% - 8px);
+      height: 50px;
+      font-size: 20px;
+      margin: 2px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      background-color: #333;
+      color: #fff;
+      padding: 0;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 12px);
+      height: 50px;
+      font-size: 20px;
+      text-align: right;
+      margin-bottom: 2px;
+      border: none;
+      outline: none;
+      padding: 5px;
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    input[type="button"].operator {
+      background-color: #ff69b4;
+    }
+
+    input[type="button"].equals {
+      background-color: #ff69b4;
+      color: #fff;
+    }
+
+    input[type="button"]:hover {
+      background-color: #ff1493;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .row:nth-child(2) input[type="button"] {
+      background-color: #222;
+    }
+
+    .row:last-child input[type="button"] {
+      background-color: #ff1493;
+    }
+    
+    @media screen and (max-width: 320px) {
+      .calculator {
+        max-width: 250px;
+      }
+
+      input[type="text"] {
+        width: calc(100% - 8px);
+      }
+
+      input[type="button"] {
+        width: calc(33.33% - 8px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Mein Calculator</h1>
+  <div class="calculator">
+    <input type="text" id="display" readonly>
+    <div class="row">
+      <input type="button" value="C" onclick="clearDisplay()">
+      <input type="button" value="+/-" onclick="negate()">
+      <input type="button" class="operator" value="%" onclick="addToDisplay('%')">
+      <input type="button" class="operator" value="/" onclick="addToDisplay('/')">
+    </div>
+    <div class="row">
+      <input type="button" value="7" onclick="addToDisplay('7')">
+      <input type="button" value="8" onclick="addToDisplay('8')">
+      <input type="button" value="9" onclick="addToDisplay('9')">
+      <input type="button" class="operator" value="*" onclick="addToDisplay('*')">
+    </div>
+    <div class="row">
+      <input type="button" value="4" onclick="addToDisplay('4')">
+      <input type="button" value="5" onclick="addToDisplay('5')">
+      <input type="button" value="6" onclick="addToDisplay('6')">
+      <input type="button" class="operator" value="-" onclick="addToDisplay('-')">
+    </div>
+    <div class="row">
+      <input type="button" value="1" onclick="addToDisplay('1')">
+      <input type="button" value="2" onclick="addToDisplay('2')">
+      <input type="button" value="3" onclick="addToDisplay('3')">
+      <input type="button" class="operator" value="+" onclick="addToDisplay('+')">
+    </div>
+    <div class="row">
+      <input type="button" value="0" onclick="addToDisplay('0')">
+      <input type="button" value="." onclick="addToDisplay('.')">
+      <input type="button" class="equals" value="=" onclick="calculate()">
+    </div>
+  </div>
+
+  <script>
+
+    // Funktion, um einen Wert zum Anzeigefeld hinzuzufügen
+    function addToDisplay(value) {
+    document.getElementById('display').value += value;
+    }
+
+    // Funktion, um den Inhalt des Anzeigefelds zu löschen
+    function clearDisplay() {
+    document.getElementById('display').value = '';
+    }
+
+    // Funktion, um den Wert im Anzeigefeld zu berechnen und anzuzeigen
+    function calculate() {
+    var display = document.getElementById('display');
+    try {
+        display.value = eval(display.value);
+    } catch (error) {
+        display.value = 'Fehler';
+    }
+    }
+
+    // Funktion, um das Vorzeichen des Werts im Anzeigefeld zu ändern
+    function negate() {
+    var display = document.getElementById('display');
+    if (display.value.charAt(0) === '-') {
+        display.value = display.value.slice(1);
+    } else {
+        display.value = '-' + display.value;
+    }
+    }
+
+
+  </script>
+</body>
+</html>
